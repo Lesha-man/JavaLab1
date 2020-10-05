@@ -1,5 +1,6 @@
 package MainPackage;
 
+import MainPackage.Furnitures.Creater;
 import MainPackage.Furnitures.CupBoards.CupBoardCreater;
 import MainPackage.Furnitures.Tables.TableCreater;
 import java.util.Scanner;
@@ -30,11 +31,11 @@ public class Start {
                 );
                 switch (in.nextInt()) {
                     case 1:
-                        TableCreater tableCreater = new TableCreater();
+                        Creater tableCreater = new TableCreater();
                         warehouse.Add(tableCreater.Create());
                         break;
                     case 2:
-                        CupBoardCreater cupBoardCreater = new CupBoardCreater();
+                        Creater cupBoardCreater = new CupBoardCreater();
                         warehouse.Add(cupBoardCreater.Create());
                         break;
                     case 3:

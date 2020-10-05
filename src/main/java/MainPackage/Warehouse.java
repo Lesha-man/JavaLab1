@@ -15,17 +15,17 @@ import java.util.List;
  * @author Я
  */
 public class Warehouse {
-    private List<Furniture> Furnitures;
+    private List<Furniture> furnitures;
         
     public Warehouse(){
-        Furnitures = new ArrayList<>();
+        furnitures = new ArrayList<>();
     }
     
     public List<Furniture> getFurnituresList(){
-        return Collections.unmodifiableList(Furnitures);
+        return Collections.unmodifiableList(furnitures);
     }
     
     public void Add(Furniture furniture){
-        Furnitures.add(furniture);
+        furnitures.add(furniture);
     }
 }
