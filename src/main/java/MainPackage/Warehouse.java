@@ -6,6 +6,7 @@
 package MainPackage;
 
 import MainPackage.Furnitures.Furniture;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.List;
  *
  * @author Я
  */
-public class Warehouse {
+public class Warehouse implements Serializable {
     private List<Furniture> furnitures;
         
     public Warehouse(){
@@ -25,7 +26,17 @@ public class Warehouse {
         return Collections.unmodifiableList(furnitures);
     }
     
-    public void Add(Furniture furniture){
+    public void add(Furniture furniture){
         furnitures.add(furniture);
+    }
+    
+    public int sellAllFur(){
+        int allCost = 0;
+        for(Furniture f : furnitures)
+        {
+            allCost += f.Price;
+        }
+        furnitures = new ArrayList<>();
+        return allCost;
     }
 }
