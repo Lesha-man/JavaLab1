@@ -1,12 +1,9 @@
 MainPackage\Menus\Invokable.class
-MainPackage\Furnitures\CupBoards\CupBoardCreater.class
 MainPackage\MyException.class
 MainPackage\Menus\MenuItem.class
 MainPackage\Furnitures\Furniture.class
 MainPackage\Seller.class
 MainPackage\Warehouse.class
-MainPackage\Start.class
-MainPackage\Furnitures\CupBoards\Cupboard.class
 MainPackage\Menus\Menu.class
 MainPackage\Furnitures\Tables\TableCreater.class
 MainPackage\Furnitures\Creater.class

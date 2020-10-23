@@ -1,7 +1,7 @@
 package MainPackage;
 
 import MainPackage.Furnitures.Creater;
-import MainPackage.Furnitures.CupBoards.CupBoardCreater;
+import MainPackage.Furnitures.Cupboard.CupboardCreater;
 import MainPackage.Furnitures.Furniture;
 import MainPackage.Furnitures.Tables.TableCreater;
 import MainPackage.Menus.Menu;
@@ -43,7 +43,7 @@ public class Start {
 
     private static void cupboardCreate() {
         System.out.println("Creation...");
-        Creater cupBoardCreater = new CupBoardCreater();
+        Creater cupBoardCreater = new CupboardCreater();
         warehouse.add(cupBoardCreater.create());
         System.out.println("Done!");
     }
