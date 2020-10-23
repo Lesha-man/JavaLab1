@@ -28,6 +28,22 @@ public class Warehouse implements Serializable {
     
     public void add(Furniture furniture){
         furnitures.add(furniture);
+    }    
+    
+    public Furniture takeAway(Furniture furniture){
+        if (furnitures.contains(furniture)) {
+            furnitures.remove(furniture);
+            return furniture;
+        }
+        return null;
+    }
+    public Furniture takeAway(int index){
+        if (furnitures.size() > index) {
+            Furniture temp = furnitures.get(index);
+            furnitures.remove(index);
+            return temp;
+        }
+        return null;
     }
     
     public int sellAllFur(SalesRegister register){

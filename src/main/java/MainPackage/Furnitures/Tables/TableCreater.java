@@ -6,6 +6,8 @@
 package MainPackage.Furnitures.Tables;
 
 import MainPackage.Furnitures.Creater;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -14,8 +16,12 @@ import MainPackage.Furnitures.Creater;
 public class TableCreater implements Creater {
 
     @Override
-    public Table Create() {
-        return new Table(10, 20); 
+    public Table create() {
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(TableCreater.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return new Table(15, 20);
     }
-
 }

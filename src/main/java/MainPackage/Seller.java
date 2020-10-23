@@ -3,11 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package MainPackage;
+
+import MainPackage.Furnitures.Furniture;
 
 /**
  *
  * @author Я
  */
-public class MyException extends Exception{
+public interface Seller {
+    public int sell(Warehouse warehouse, Furniture furniture, SalesRegister register);
 }

@@ -10,5 +10,5 @@ package MainPackage.Furnitures;
  * @author Я
  */
 public interface Creater {
-    public Furniture Create();
+    public Furniture create();
 }

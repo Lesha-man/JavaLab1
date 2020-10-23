@@ -8,6 +8,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Iterator;
 import java.util.Scanner;
 
 /*
@@ -22,32 +23,38 @@ import java.util.Scanner;
 //import javassist.ClassPool;
 public class Start {
 
+    private static Seller seller = new FurnituresSeller();
+    private static SalesRegister register = new SalesRegister();
+    private static Warehouse warehouse = new Warehouse();
+   
     public static void main(String args[]) {
-        SalesRegister register = new SalesRegister();
-        Warehouse warehouse = new Warehouse();
+
         Scanner in = new Scanner(System.in);
         while (true) {
             try{
-                
                 System.out.println(
-                        "1 - Create table and send to warehouse\n"
+                          "1 - Create table and send to warehouse\n"
                         + "2 - Create cupboard and send to warehouse\n"
                         + "3 - Check all count of furnitures\n"
                         + "4 - Sell all furnitures\n"
                         + "5 - Check Sales register\n"
                         + "6 - Serialization\n"
                         + "7 - Deserialization\n"
-                        + "0 - Exit"
+                        + "8 - Factorio start\n"
+                        + "0 - Exit\n"
                 );
+                if (!in.hasNextInt()) {
+                    continue;
+                }
                 switch (in.nextInt()) {
                     case 1:{
                         Creater tableCreater = new TableCreater();
-                        warehouse.add(tableCreater.Create());
+                        warehouse.add(tableCreater.create());
                         break;
                     }
                     case 2: {
                         Creater cupBoardCreater = new CupBoardCreater();
-                        warehouse.add(cupBoardCreater.Create());
+                        warehouse.add(cupBoardCreater.create());
                         break;
                     }
                     case 3: {
@@ -58,6 +65,9 @@ public class Start {
                         break;
                     }
                     case 4: {
+                        for (Furniture furniture : warehouse.getFurnituresList()) {
+                            seller.sell(warehouse, furniture, register);
+                        }
                         System.out.println("Profit: " + warehouse.sellAllFur(register) + '$');
                         break;
                     }
@@ -70,7 +80,7 @@ public class Start {
                         break;
                     }
                     case 6: {
-                        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("person.dat"))) {
+                        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("warehouse.dat"))) {
                             oos.writeObject(warehouse);
                         } catch (Exception ex) {
                             System.out.println(ex.getMessage());
@@ -78,15 +88,37 @@ public class Start {
                         break;
                     }
                     case 7: {
-                        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("person.dat"))) {
+                        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("warehouse.dat"))) {
                             warehouse = ((Warehouse) ois.readObject());
                         } catch (Exception ex) {
                             System.out.println(ex.getMessage());
                         }
                         break;
                     }
-                    default:
+                    case 8: {
+                        do {
+                            System.out.println("Ticks count: ");
+                        } while (!in.hasNextInt());
+                        int ticks = in.nextInt();
+                        Thread t = new Thread(() -> {
+                            for (int i = 0; i < ticks ; i++) {
+                                while (warehouse.getFurnituresList().isEmpty());
+                                
+                                System.out.println("+" + seller.sell(warehouse, warehouse.getFurnituresList().get(0), register) + "$");
+                            }
+                        });
+                        t.start();
+                        for (int i = 0; i < ticks; i++) {
+                            Creater tableCreater = new TableCreater();
+                            warehouse.add(tableCreater.create());
+                        }
+                        break;
+                    }
+                    case 0: {
                         return;
+                    }
+                    default:
+                        break;
                 }
             }
             catch(MyException ex){

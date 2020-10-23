@@ -24,7 +24,7 @@ public class SalesRegister {
     public Map<Furniture, String> getFurnituresMap(){
         return Collections.unmodifiableMap(sales);
     }
-    public void add(Furniture furniture, String name){
-        sales.put(furniture, name);
+    public void add(Furniture furniture, String clientName){
+        sales.put(furniture, clientName);
     }
 }
