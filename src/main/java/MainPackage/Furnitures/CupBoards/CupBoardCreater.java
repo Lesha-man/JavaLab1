@@ -17,13 +17,13 @@ import java.util.logging.Logger;
 public class CupBoardCreater implements Creater {
 
     @Override
-    public CupBoard create() {
+    public Cupboard create() {
         try {
             Thread.sleep(1000);
         } catch (InterruptedException ex) {
             Logger.getLogger(TableCreater.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return new CupBoard(100, 200);
+        return new Cupboard(100, 200);
     }
 
 }

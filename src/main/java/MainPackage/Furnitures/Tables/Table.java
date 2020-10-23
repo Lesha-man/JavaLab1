@@ -18,8 +18,12 @@ public class Table extends Furniture{
     }
     
     
-    public boolean StandStill(){
+    public boolean standStill(){
         return true;
     }
     
+    @Override
+    public String toString() {
+        return "Table"; //To change body of generated methods, choose Tools | Templates.
+    }
 }

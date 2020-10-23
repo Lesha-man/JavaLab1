@@ -5,11 +5,13 @@
  */
 package MainPackage.Furnitures;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Я
  */
-public abstract class Furniture {
+public abstract class Furniture implements Serializable{
         public int Price;
         public int Mass;
         
@@ -17,4 +19,10 @@ public abstract class Furniture {
             Price = price;
             Mass = mass;
         }
+
+    @Override
+    public String toString() {
+        return "Furniture";
+    }
+        
 }

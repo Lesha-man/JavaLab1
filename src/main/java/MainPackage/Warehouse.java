@@ -45,16 +45,4 @@ public class Warehouse implements Serializable {
         }
         return null;
     }
-    
-    public int sellAllFur(SalesRegister register){
-        int allCost = 0;
-        int i = 0;
-        for(Furniture f : furnitures)
-        {
-            register.add(f, "Bob" + i++);
-            allCost += f.Price;
-        }
-        furnitures = new ArrayList<>();
-        return allCost;
-    }
 }
