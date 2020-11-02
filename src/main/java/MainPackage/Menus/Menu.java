@@ -35,7 +35,7 @@ public class Menu {
             for (int i = 1; i < items.size(); i++) {
                 System.out.println(i + " - " + items.get(i).viewItem);
             }
-            if (items.get(0).viewItem != "") {
+            if (items.get(0).viewItem != "" && items.get(0).viewItem != null) {
                 System.out.println("0 - " + items.get(0).viewItem);
             }
             Scanner in = new Scanner(System.in);

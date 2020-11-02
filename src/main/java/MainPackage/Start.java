@@ -10,7 +10,10 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Iterator;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class Start {
@@ -20,18 +23,26 @@ public class Start {
     private static Warehouse warehouse = new Warehouse();
 
     public static void main(String args[]) {
-        Menu menu = new Menu(
-            new MenuItem("Create table and send to warehouse", () -> tableCreate()),
-            new MenuItem("Create cupboard and send to warehouse", () -> cupboardCreate()),
-            new MenuItem("Check all count of furnitures", () -> count()),
-            new MenuItem("Sell all furnitures", () -> sellAll()),
-            new MenuItem("Check Sales register", () -> checkRegister()),
-            new MenuItem("Serialization", () -> serialize()),
-            new MenuItem("Deserialization", () -> deserialize()),
-            new MenuItem("Factorio start", () -> factorioStart())
-        );
-        menu.setZeroItem(new MenuItem("Exit"));
-        while (menu.call() != 0) ;
+       
+            Menu menu = new Menu(
+                new MenuItem("Create table and send to warehouse", () -> tableCreate()),
+                new MenuItem("Create cupboard and send to warehouse", () -> cupboardCreate()),
+                new MenuItem("Check all count of furnitures", () -> {
+                try {
+                    count();
+                } catch (MyException ex) {
+                    Logger.getLogger(Start.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }),
+                new MenuItem("Sell all furnitures", () -> sellAll()),
+                new MenuItem("Check Sales register", () -> checkRegister()),
+                new MenuItem("Serialization", () -> serialize()),
+                new MenuItem("Deserialization", () -> deserialize()),
+                new MenuItem("Factorio start", () -> factorioStart())
+            );
+            menu.setZeroItem(new MenuItem("Exit"));
+            while (menu.call() != 0) ;
+           
     }
 
     private static void tableCreate() {
@@ -48,20 +59,18 @@ public class Start {
         System.out.println("Done!");
     }
 
-    private static void count() {
-        try {
+    private static void count() throws MyException {
+
             if (warehouse.getFurnituresList().isEmpty()) {
                 throw new MyException();
             }
             System.out.println("Count: " + warehouse.getFurnituresList().size());
-        } catch (MyException ex) {
-            System.err.println(ex);
-        }
     }
 
     private static void sellAll() {
         int profit = 0;
         int size = warehouse.getFurnituresList().size();
+        
         for (int i = 0; i < size; i++) {
             profit += seller.sell(warehouse, warehouse.getFurnituresList().get(0), register);
         }
@@ -69,11 +78,9 @@ public class Start {
     }
 
     private static void checkRegister() {
-        int i = 0;
-        for (Furniture furniture : register.getFurnituresMap().keySet()) {
-            i++;
+        register.getFurnituresMap().keySet().stream().forEach((furniture)-> {
             System.out.println(furniture.toString() + " sold to client " + register.getFurnituresMap().get(furniture));
-        }
+        });
     }
 
     private static void serialize() {

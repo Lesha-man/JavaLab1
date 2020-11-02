@@ -39,4 +39,9 @@ public class Cupboard extends Furniture{
     public String toString() {
         return "Cupboard"; 
     }
+
+    @Override
+    public String info() {
+        return "Cupboard info"; 
+    }
 }

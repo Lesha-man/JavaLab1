@@ -24,6 +24,11 @@ public class Table extends Furniture{
     
     @Override
     public String toString() {
-        return "Table"; //To change body of generated methods, choose Tools | Templates.
+        return "Table";
+    }
+
+    @Override
+    public String info() {
+        return "Table info"; 
     }
 }
